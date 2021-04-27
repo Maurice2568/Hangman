@@ -8,15 +8,6 @@
 #define MaxNumWords 2048
 #define MaxWordLength 64
 
-
-
-//function to do the output
-/*
-0 already guessed
-1-11 Lifecounter
-12 Menu
-13 newlines to fit in the Window
-*/
 //Main menu to guide to the other parts of the Game
 int Menu()
 {
@@ -30,7 +21,7 @@ int Menu()
         if (input[0] == '1'){
             Play();
         }else if (input[0] == '2'){
-
+            Play();
         }else if (input[0] == '3'){
             WriteFile();
         }else if (input[0] == '4'){
@@ -41,8 +32,15 @@ int Menu()
     return 0;
 }
 
+//function to do the output
+/*
+0 already guessed
+1-11 Lifecounter
+12 Menu
+13 newlines to fit in the Window
+*/
 int Screen(int page){
-
+    char player1[];
     if (page == 0){
             printf("Folgende Buchstaben wurden schon geraten: ");//empty
     }else if(page == 1){
