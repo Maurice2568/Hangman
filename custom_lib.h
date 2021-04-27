@@ -6,7 +6,7 @@ char ReadChar();
 void RemoveChars(char* str, char c);
 int Play(char *aResult);
 int Menu();
-int ReadFile();
+const char* ReadFile();
 int AppendFile();
 int WriteFile();
 #endif // CUSTOM_LIB_H_INCLUDED

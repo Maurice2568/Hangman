@@ -4,7 +4,7 @@
 #include <time.h>
 #include <sys/stat.h>
 #include "custom_lib.h"
-
+#include <ctype.h>
 #define MaxNumWords 2048
 #define MaxWordLength 64
 
@@ -13,14 +13,13 @@ int Menu()
 {
     char input[1];
     int stop = 0;
-
-
+    char *word = ReadFile();;
     while (stop == 0)
     {
         printf("_______________________________________________________________________\n  Hallo und herzlich willkommen zu einer neuen Runde Hangman \n\n  Was moechtest du tun?\n 1 -Einzelspieler Partie starten\n 2 -Zwei Spieler Partie starten\n 3 -neue Loesungswoerter eintragen\n 4 -Programm beenden\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         fflush(stdin);
         scanf(" %c",&input[0]);
-        char *word = "wort";
+
         if (input[0] == '1')
         {
             Play(word);
@@ -31,7 +30,17 @@ int Menu()
         }
         else if (input[0] == '3')
         {
+            printf("[1]Neue Datei\n[2]Wort hinzufuegen\n");
+            scanf(" %c",&input[0]);
+            if (input[0] == '1')
+            {
             WriteFile();
+            }
+            else if (input[0] == '2')
+            {
+            AppendFile();
+            }
+
         }
         else if (input[0] == '4')
         {
@@ -154,6 +163,7 @@ int Play(char *aResult)
     char view[255] = "";
     char incorrectLetters[24] = "";
     char correctLetters[24] = "";
+    //printf("%s",aResult);
     for (int i = 0; i < strlen(aResult); i++)
     {
         view[i] = '_';
@@ -186,10 +196,12 @@ int Play(char *aResult)
 }
 
 
-int ReadFile()
+const char* ReadFile()
 {
     int i;
+    int randomIndex;
     srand(time(NULL));
+    //char randomWord;
 
     char guessWords[MaxNumWords][MaxWordLength];
     int WordsReadIn = 0;
@@ -208,19 +220,22 @@ int ReadFile()
     while(fgets(input, 63, fp))
     {
         for(i = 0; (i < 100 && input[i] != '\0'); i++)
-            input[i] = input[i] - 13;
+            input[i] =/*tolower(*/input[i] - 13/*)*/;
+
         sscanf(input, "%s", guessWords[WordsReadIn]);
         WordsReadIn++;
     }
 
-    printf("Eingelesene Woerter: %d\n",WordsReadIn);
+
     fseek(fp, 0, SEEK_END); // goto end of file
     if (ftell(fp) == 0)
     {
         printf("Leere Datei. \n"); //file empty
     }
+    randomIndex = rand() % WordsReadIn;
     fclose(fp); // close the file
-    return 0;
+    char *randomWord = guessWords[randomIndex];
+    return randomWord;
 }
 
 int AppendFile()
@@ -235,7 +250,7 @@ int AppendFile()
     fgets(input, 16, stdin);
     for(i = 0; (i < 100 && input[i] != '\0'); i++)
         input[i] = input[i] + 13;
-    fprintf(fp,input,"\n");
+    fprintf(fp,"%s\n",input);
     printf("Weitere Woerter hinzufuegen? y/n\n");
     scanf(" %c",&answer);
     while(answer == 'y' || answer == 'j')
@@ -245,7 +260,7 @@ int AppendFile()
         fgets(input, 16, stdin);
         for(i = 0; (i < 100 && input[i] != '\0'); i++)
             input[i] = input[i] + 13;
-        fprintf(fp,input,"\n");
+        fprintf(fp,"%s\n",input);
         printf("Weitere Wörter hinzufuegen? y/n\n");
         scanf(" %c",&answer);
         fflush(stdin);
@@ -266,7 +281,7 @@ int WriteFile()
     fgets(input, 16, stdin);
     for(i = 0; (i < 100 && input[i] != '\0'); i++)
         input[i] = input[i] + 13;
-    fprintf(fp,input);
+    fprintf(fp,"%s\n",input);
     printf("Weitere Woerter hinzufuegen? y/n\n");
     scanf(" %c",&answer);
     while(answer == 'y' || answer == 'j')
@@ -276,7 +291,7 @@ int WriteFile()
         fgets(input, 16, stdin);
         for(i = 0; (i < 100 && input[i] != '\0'); i++)
             input[i] = input[i] + 13;
-        fprintf(fp,input);
+        fprintf(fp,"%s\n",input);
         printf("Weitere Woerter hinzufuegen? y/n\n");
         scanf(" %c",&answer);
         fflush(stdin);
