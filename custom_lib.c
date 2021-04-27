@@ -126,7 +126,7 @@ int Menu()
     char input[1];
     Screen(12);
     fflush(stdin);
-    scanf(" %c",&input);
+    scanf(" %c",&input[0]);
     if (input[0] == '1'){
         Play();
     }else if (input[0] == '2'){
@@ -143,7 +143,7 @@ int Menu()
 
 int ReadFile()
 {
-    int i,x;
+    int i;
     srand(time(NULL));
 
     char guessWords[MaxNumWords][MaxWordLength];
@@ -174,11 +174,12 @@ if (ftell(fp) == 0)
      printf("Leere Datei. \n"); //file empty
  }
     fclose(fp); // close the file
+    return 0;
 }
 
 int AppendFile()
 {
-int i,x;
+int i;
 char input[255];
 char answer;
 printf("Loesungswort:");
@@ -207,10 +208,9 @@ fclose(fp);
 return 0;
 }
 
-
 int WriteFile()
 {
-int i, x;
+int i;
 char input[255];
 char answer;
 printf("Loesungswort:");
