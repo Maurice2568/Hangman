@@ -17,6 +17,26 @@
 12 Menu
 13 newlines to fit in the Window
 */
+//Main menu to guide to the other parts of the Game
+int Menu()
+{
+    char input[1];
+    Screen(12);
+    fflush(stdin);
+    scanf(" %c",&input[0]);
+    if (input[0] == '1'){
+        Play();
+    }else if (input[0] == '2'){
+
+    }else if (input[0] == '3'){
+
+    }else if (input[0] == '4'){
+        printf("Auf Wiedersehen\n\n\n\n");
+        return 0;
+    }
+    return 0;
+}
+
 int Screen(int page){
 
     if (page == 0){
@@ -117,26 +137,6 @@ int Play()
         printf("\n%s\nrichtig: %s\nfalsch: %s\n\n", view, correctLetters, incorrectLetters);
     }
     Menu();
-    return 0;
-}
-
-//Main menu to guide to the other parts of the Game
-int Menu()
-{
-    char input[1];
-    Screen(12);
-    fflush(stdin);
-    scanf(" %c",&input[0]);
-    if (input[0] == '1'){
-        Play();
-    }else if (input[0] == '2'){
-
-    }else if (input[0] == '3'){
-
-    }else if (input[0] == '4'){
-        printf("Auf Wiedersehen\n\n\n\n");
-        return 0;
-    }
     return 0;
 }
 
