@@ -5,15 +5,12 @@
 	<string.h>
 	"custom_lib.h"
 
-1619522971 c:\users\orange\documents\codeblocks\hangman\hangman\custom_lib.h
+1619528141 c:\users\orange\documents\codeblocks\hangman\hangman\custom_lib.h
 
-1619527503 source:c:\users\orange\documents\codeblocks\hangman\hangman\main.c
+1619528076 source:c:\users\orange\documents\codeblocks\hangman\hangman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"custom_lib.h"
-	"readfile.c"
-	"appendfile.c"
-	"writefile.c"
 
 1619527179 c:\users\orange\documents\codeblocks\hangman\hangman\readfile.c
 	<stdio.h>

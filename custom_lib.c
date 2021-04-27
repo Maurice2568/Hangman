@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <sys/stat.h>
 #include "custom_lib.h"
+
+#define MaxNumWords 2048
+#define MaxWordLength 64
+
 
 
 //function to do the output
@@ -133,4 +139,103 @@ int Menu()
     }
     return 0;
 }
-//checkout
+
+
+int ReadFile()
+{
+    int i,x;
+    srand(time(NULL));
+
+    char guessWords[MaxNumWords][MaxWordLength];
+    int WordsReadIn = 0;
+
+    FILE *fp = fopen("guesswords.dat","r"); //read the file
+
+    if(fp == NULL)
+    {
+        printf("Fehler beim oeffnen der Datei\n");
+        return 0;
+    }
+
+
+    char input[64];
+
+    while(fgets(input, 63, fp)) {
+        for(i = 0; (i < 100 && input[i] != '\0'); i++)
+        input[i] = input[i] - 13;
+		sscanf(input, "%s", guessWords[WordsReadIn]);
+		WordsReadIn++;
+	}
+
+    printf("Eingelesene Woerter: %d\n",WordsReadIn);
+fseek(fp, 0, SEEK_END); // goto end of file
+if (ftell(fp) == 0)
+ {
+     printf("Leere Datei. \n"); //file empty
+ }
+    fclose(fp); // close the file
+}
+
+int AppendFile()
+{
+int i,x;
+char input[255];
+char answer;
+printf("Loesungswort:");
+FILE *fp;
+fp  = fopen ("guesswords.dat", "a");
+fflush(stdin);
+fgets(input, 16, stdin);
+for(i = 0; (i < 100 && input[i] != '\0'); i++)
+        input[i] = input[i] + 13;
+fprintf(fp,input,"\n");
+printf("Weitere Woerter hinzufuegen? y/n\n");
+scanf(" %c",&answer);
+while(answer == 'y' || answer == 'j')
+{
+  printf("Loesungswort: ");
+  fflush(stdin);
+  fgets(input, 16, stdin);
+  for(i = 0; (i < 100 && input[i] != '\0'); i++)
+        input[i] = input[i] + 13;
+  fprintf(fp,input,"\n");
+  printf("Weitere Wörter hinzufuegen? y/n\n");
+  scanf(" %c",&answer);
+  fflush(stdin);
+}
+fclose(fp);
+return 0;
+}
+
+
+int WriteFile()
+{
+int i, x;
+char input[255];
+char answer;
+printf("Loesungswort:");
+FILE *fp;
+fp  = fopen ("guesswords.dat", "w");
+fflush(stdin);
+fgets(input, 16, stdin);
+for(i = 0; (i < 100 && input[i] != '\0'); i++)
+        input[i] = input[i] + 13;
+fprintf(fp,input);
+printf("Weitere Woerter hinzufuegen? y/n\n");
+scanf(" %c",&answer);
+while(answer == 'y' || answer == 'j')
+{
+  printf("Loesungswort: ");
+  fflush(stdin);
+  fgets(input, 16, stdin);
+  for(i = 0; (i < 100 && input[i] != '\0'); i++)
+        input[i] = input[i] + 13;
+  fprintf(fp,input);
+  printf("Weitere Woerter hinzufuegen? y/n\n");
+  scanf(" %c",&answer);
+  fflush(stdin);
+}
+fclose(fp);
+return 0;
+}
+
