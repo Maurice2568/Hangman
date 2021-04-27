@@ -9,6 +9,7 @@
 0 already guessed
 1-11 Lifecounter
 12 Menu
+13 newlines to fit in the Window
 */
 int Screen(int page){
 
@@ -74,29 +75,29 @@ int IsEqual(char *s1, char *s2)
 
 int Play()
 {
-    char fResult[255] = "";
+    char result[255] = "";
     char view[255] = "";
-    char fIncorrectLetters[24] = "";
-    char fCorrectLetters[24] = "";
+    char incorrectLetters[24] = "";
+    char correctLetters[24] = "";
 
     printf("Enter Word: ");
     fflush(stdin);
-    scanf("%s", fResult);
-    for (int i = 0; i < strlen(fResult); i++)
+    scanf("%s", result);
+    for (int i = 0; i < strlen(result); i++)
     {
         view[i] = '_';
     }
-    while(!IsEqual(fResult, view))
+    while(!IsEqual(result, view))
     {
         fflush(stdin);
         char letter = ReadChar();
-        if (strchr(fResult, letter) != NULL)
+        if (strchr(result, letter) != NULL)
         {
-            printf("Richtig! %c", letter);
-            strcat(&fCorrectLetters, letter);
-            for (int i = 0; i < strlen(fResult); i++)
+            printf("Richtig!");
+            correctLetters[strlen(correctLetters)] = letter;
+            for (int i = 0; i < strlen(result); i++)
             {
-                if (fResult[i] == letter)
+                if (result[i] == letter)
                 {
                     view[i] = letter;
                 }
@@ -104,12 +105,12 @@ int Play()
         }
         else
         {
-            printf("Falsch! %c", letter);
-            strcat(fIncorrectLetters, &letter);
+            printf("Falsch!");
+            incorrectLetters[strlen(incorrectLetters)] = letter;
         }
-        printf("\n%s\nrichtig: %s\nfalsch: %s\nResult: %s\n", view, fCorrectLetters, fIncorrectLetters, fResult);
-
+        printf("\n%s\nrichtig: %s\nfalsch: %s\n\n", view, correctLetters, incorrectLetters);
     }
+    Menu();
     return 0;
 }
 

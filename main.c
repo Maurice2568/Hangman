@@ -5,8 +5,6 @@
 #include "appendfile.c"
 #include "writefile.c"
 
-
-
 int main()
 {
     Menu();
