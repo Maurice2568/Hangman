@@ -21,18 +21,22 @@
 int Menu()
 {
     char input[1];
+    int stop = 0;
     Screen(12);
     fflush(stdin);
     scanf(" %c",&input[0]);
-    if (input[0] == '1'){
-        Play();
-    }else if (input[0] == '2'){
 
-    }else if (input[0] == '3'){
+    while (stop == 0){
+        if (input[0] == '1'){
+            Play();
+        }else if (input[0] == '2'){
 
-    }else if (input[0] == '4'){
-        printf("Auf Wiedersehen\n\n\n\n");
-        return 0;
+        }else if (input[0] == '3'){
+            WriteFile();
+        }else if (input[0] == '4'){
+            printf("Auf Wiedersehen\n\n\n\n");
+            stop = 1;
+        }
     }
     return 0;
 }
