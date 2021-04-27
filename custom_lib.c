@@ -13,19 +13,21 @@ int Menu()
 {
     char input[1];
     int stop = 0;
-    Screen(12);
-    fflush(stdin);
-    scanf(" %c",&input[0]);
+
 
     while (stop == 0)
     {
+        printf("_______________________________________________________________________\n  Hallo und herzlich willkommen zu einer neuen Runde Hangman \n\n  Was moechtest du tun?\n 1 -Einzelspieler Partie starten\n 2 -Zwei Spieler Partie starten\n 3 -neue Loesungswoerter eintragen\n 4 -Programm beenden\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        fflush(stdin);
+        scanf(" %c",&input[0]);
+        char *word = "wort";
         if (input[0] == '1')
         {
-            Play();
+            Play(word);
         }
         else if (input[0] == '2')
         {
-            Play();
+            Play(word);
         }
         else if (input[0] == '3')
         {
@@ -35,6 +37,10 @@ int Menu()
         {
             printf("Auf Wiedersehen\n\n\n\n");
             stop = 1;
+        }
+        else
+        {
+            printf("Das war keine gültige Eingabe versuch es noch einmal.\n");
         }
     }
     return 0;
@@ -46,124 +52,123 @@ int Menu()
 1-11 Lifecounter
 12 Menu
 13 newlines to fit in the Window
+    char result[255] = "";
+    char view[255] = "";
+    char incorrectLetters[24] = "";
+    char correctLetters[24] = "";
 */
-int Screen(int page)
+int Screen(char aView[255], char aIncorrectLetters[24], char aCorrectLetters[24], char aPlayer1[255], char aPlayer2[255], int aFails)
 {
-    char player1[];
-    if (page == 0)
+
+    if (aFails == 0)
     {
-        printf("Folgende Buchstaben wurden schon geraten: ");//empty
+        printf("Folgende Buchstaben wurden schon geraten: ");
+        //printf("Folgende Buchstaben wurden schon geraten: ");//empty
     }
-    else if(page == 1)
+    else if(aFails == 1)
     {
         printf("00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n\n\n");
     }
-    else if(page == 2)  //Hangmans following
+    else if(aFails == 2)  //Hangmans following
     {
         printf("00\n00\n00\n00\n00\n00\n00\n00\n00\n00\n000\n0000\n00 00\n00  00\n00   00\n00    00\n00     00\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 3)
+    else if(aFails == 3)
     {
         printf("0000000000000000000000000000000000000000\n00\n00\n00\n00\n00\n00\n00\n00\n00\n000\n0000\n00 00\n00  00\n00   00\n00    00\n00     00\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 4)
+    else if(aFails == 4)
     {
         printf( "0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00\n00\n00\n00\n00\n00\n000\n0000\n00 00\n00  00\n00   00\n00    00\n00     00\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 5)
+    else if(aFails == 5)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00\n00\n000\n0000\n00 00\n00  00\n00   00\n00    00\n00     00\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 6)
+    else if(aFails == 6)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00                                 333333333\n00                                 3333<3333 \n000                                333333333\n0000                               333333333\n00 00                              333333333\n00  00\n00   00\n00    00\n00     00\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 7)
+    else if(aFails == 7)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00                                 333333333\n00                                 3333<3333 \n000                                333333333\n0000                               333333333\n00 00                              333333333\n00  00                             333   \n00   00                            333   \n00    00                           333   \n00     00                          333   \n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 8)
+    else if(aFails == 8)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00                                 333333333\n00                                 3333<3333 \n000                                333333333\n0000                               333333333\n00 00                              333333333\n00  00                             333   333\n00   00                            333   333\n00    00                           333   333\n00     00                          333   333\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 9)
+    else if(aFails == 9)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00                                3333333333\n00                               3 3333<3333 \n000                             3  333333333\n0000                           3   333333333\n00 00                              333333333\n00  00                             333   333\n00   00                            333   333\n00    00                           333   333\n00     00                          333   333\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 10)
+    else if(aFails == 10)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |o  o |\n00                                  |___  |\n00                                    22\n00                                33333333333\n00                               3 3333<3333 3 \n000                             3  333333333  3\n0000                           3   333333333   3\n00 00                              333333333\n00  00                             333   333\n00   00                            333   333\n00    00                           333   333\n00     00                          333   333\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 11)
+    else if(aFails == 11)
     {
         printf("0000000000000000000000000000000000000000\n00                                    00\n00                                    00\n00                                    00\n00                                  !!!!!!\n00                                  |x  x |\n00                                  |___  |\n00                                    22\n00                                33333333333\n00                               3 3333<3333 3 \n000                             3  333333333  3\n0000                           3   333333333   3\n00 00                              333333333\n00  00                             333   333\n00   00                            333   333\n00    00                           333   333\n00     00                          333   333\n00      00\n00       00\n00        00\n\n\n");
     }
-    else if(page == 12)  //startpage
+    else if(aFails == 12)  //startaFails
     {
         printf("_______________________________________________________________________\n  Hallo und herzlich willkommen zu einer neuen Runde Hangman \n\n  Was moechtest du tun?\n 1 -Einzelspieler Partie starten\n 2 -Zwei Spieler Partie starten\n 3 -neue Loesungswoerter eintragen\n 4 -Programm beenden\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
-    else if(page == 13)
+    else if(aFails == 13)
     {
-        printf("\n\n\n\n\n");
+        printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
     else
     {
-        printf("nothing to print? %d",page);
+        printf("nothing to print? %d",aFails);
     }
     return 0;
 }
 
-char ReadChar()
+char ReadChar(char *aIncorrectLetters, char *aCorrectLetters)
 {
     char letter;
     printf("Try letter: ");
     fflush(stdin);
     scanf("%c", &letter);
-    if (!isalpha(letter))
+    if(!isalpha(letter))
     {
         printf("Only letters allowed!\n");
-        return ReadChar();
+        return ReadChar(aIncorrectLetters, aCorrectLetters);
     }
+    else if(strchr(aIncorrectLetters, letter) || strchr(aCorrectLetters, letter))
+    {
+        printf("Buchstabe bereits getippt!\n");
+        return ReadChar(aIncorrectLetters, aCorrectLetters);
+    }
+    else if(letter >= 'A' && letter <= 'Z')
+    {
+        letter = letter + 32;
+    }
+
     return letter;
 }
 
-int IsEqual(char *s1, char *s2)
-{
-    for(int i = 0; i < strlen(s1); i++)
-    {
-        if(s1[i] != s2[i])
-        {
-            return 0;
-        }
-    }
-    return 1;
-}
 
-int Play()
+int Play(char *aResult)
 {
-    char result[255] = "";
     char view[255] = "";
     char incorrectLetters[24] = "";
     char correctLetters[24] = "";
-
-    printf("Enter Word: ");
-    fflush(stdin);
-    scanf("%s", result);
-    for (int i = 0; i < strlen(result); i++)
+    for (int i = 0; i < strlen(aResult); i++)
     {
         view[i] = '_';
     }
-    while(!IsEqual(result, view))
+    while(strcmp(aResult, view))
     {
         fflush(stdin);
-        char letter = ReadChar();
-        if (strchr(result, letter) != NULL)
+        char letter = ReadChar(incorrectLetters, correctLetters);
+        if (strchr(aResult, letter) != NULL)
         {
             printf("Richtig!");
             correctLetters[strlen(correctLetters)] = letter;
-            for (int i = 0; i < strlen(result); i++)
+            for (int i = 0; i < strlen(aResult); i++)
             {
-                if (result[i] == letter)
+                if (aResult[i] == letter)
                 {
                     view[i] = letter;
                 }
@@ -174,7 +179,7 @@ int Play()
             printf("Falsch!");
             incorrectLetters[strlen(incorrectLetters)] = letter;
         }
-        printf("\n%s\nrichtig: %s\nfalsch: %s\n\n", view, correctLetters, incorrectLetters);
+        Screen(view, incorrectLetters, correctLetters, "aPlayer1", "aPlayer2", strlen(incorrectLetters));
     }
     Menu();
     return 0;
