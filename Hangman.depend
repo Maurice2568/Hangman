@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1619452093 source:c:\users\orange\documents\codeblocks\hangman\hangman\custom_lib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"custom_lib.h"
+
+1619522971 c:\users\orange\documents\codeblocks\hangman\hangman\custom_lib.h
+
+1619522834 source:c:\users\orange\documents\codeblocks\hangman\hangman\main.c
+	<stdio.h>
+	<stdlib.h>
+	"custom_lib.h"
+
