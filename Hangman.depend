@@ -33,7 +33,7 @@
 	<string.h>
 	<time.h>
 
-1619537898 source:c:\users\johnson\documents\github\hangman\custom_lib.c
+1620050972 source:c:\users\johnson\documents\github\hangman\custom_lib.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -42,7 +42,7 @@
 	"custom_lib.h"
 	<ctype.h>
 
-1619537529 c:\users\johnson\documents\github\hangman\custom_lib.h
+1620051385 c:\users\johnson\documents\github\hangman\custom_lib.h
 
 1619530182 source:c:\users\johnson\documents\github\hangman\main.c
 	<stdio.h>

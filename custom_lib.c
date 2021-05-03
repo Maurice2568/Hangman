@@ -13,19 +13,20 @@ int Menu()
 {
     char input[1];
     int stop = 0;
-    char *word = ReadFile();;
+    char *word = ReadFile();
     while (stop == 0)
     {
         printf("_______________________________________________________________________\n  Hallo und herzlich willkommen zu einer neuen Runde Hangman \n\n  Was moechtest du tun?\n 1 -Einzelspieler Partie starten\n 2 -Zwei Spieler Partie starten\n 3 -neue Loesungswoerter eintragen\n 4 -Programm beenden\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         fflush(stdin);
         scanf(" %c",&input[0]);
-
         if (input[0] == '1')
         {
+            ReadFile();
             Play(word);
         }
         else if (input[0] == '2')
         {
+            ReadFile();
             Play(word);
         }
         else if (input[0] == '3')
@@ -196,12 +197,12 @@ int Play(char *aResult)
 }
 
 
-const char* ReadFile()
+char* ReadFile()
 {
     int i;
     int randomIndex;
     srand(time(NULL));
-    //char randomWord;
+
 
     char guessWords[MaxNumWords][MaxWordLength];
     int WordsReadIn = 0;
@@ -220,7 +221,7 @@ const char* ReadFile()
     while(fgets(input, 63, fp))
     {
         for(i = 0; (i < 100 && input[i] != '\0'); i++)
-            input[i] =/*tolower(*/input[i] - 13/*)*/;
+            input[i] = input[i] - 13;
 
         sscanf(input, "%s", guessWords[WordsReadIn]);
         WordsReadIn++;
@@ -240,30 +241,42 @@ const char* ReadFile()
 
 int AppendFile()
 {
-    int i;
-    char input[255];
-    char answer;
-    printf("Loesungswort:");
-    FILE *fp;
-    fp  = fopen ("guesswords.dat", "a");
-    fflush(stdin);
-    fgets(input, 16, stdin);
-    for(i = 0; (i < 100 && input[i] != '\0'); i++)
-        input[i] = input[i] + 13;
+    int i; // Iterationsvariable
+    char input[255]; //"String"-Variable
+    char answer; // Entscheidungs-Variable
+    printf("Loesungswort:"); // Ausgeben
+    FILE *fp; //von Typ "File"
+    fp  = fopen ("guesswords.dat", "a"); // Datei oeffnen
+    fflush(stdin); //Tastenzwischenspeicher leeren
+    fgets(input, 16, stdin); //User-input
+    for(i = 0; (i < 100 && input[i] != '\0'); i++) //For-Schleife fuer um Eingabe in kleinbuchstaben und mit ROT13 bearbeiten
+        {
+            if(input[i] >= 'A' && input[i] <= 'Z') //Wenn Grossbuchstabe
+            {
+                input[i] = input[i] + 32; // ASCII + 32 macht grossbuchstabe in Kleinbuchstabe
+            }
+            input[i] = input[i] + 13; //ROT13
+        }
     fprintf(fp,"%s\n",input);
     printf("Weitere Woerter hinzufuegen? y/n\n");
     scanf(" %c",&answer);
-    while(answer == 'y' || answer == 'j')
+    while(answer == 'y' || answer == 'j') // While-Schleife um weiteres vorgehen einzuleiten
     {
-        printf("Loesungswort: ");
-        fflush(stdin);
-        fgets(input, 16, stdin);
-        for(i = 0; (i < 100 && input[i] != '\0'); i++)
-            input[i] = input[i] + 13;
-        fprintf(fp,"%s\n",input);
-        printf("Weitere Wörter hinzufuegen? y/n\n");
-        scanf(" %c",&answer);
-        fflush(stdin);
+        printf("Loesungswort: "); //Ausgabe
+        fflush(stdin); // Tastenzwischenspeicher leeren
+        fgets(input, 16, stdin); // User-input
+        for(i = 0; (i < 100 && input[i] != '\0'); i++) //For-Schleife fuer um Eingabe in Kleinbuchstaben und mit ROT13 bearbeiten
+        {
+            if(input[i] >= 'A' && input[i] <= 'Z')  //Wenn Grossbuchstabe
+            {
+                input[i] = input[i] + 32; // ASCII + 32 macht grossbuchstabe in Kleinbuchstabe
+            }
+            input[i] = input[i] + 13; // Wenn Grossbuchstabe
+        }
+        fprintf(fp,"%s\n",input); //In Datei schreiben
+        printf("Weitere Wörter hinzufuegen? y/n\n"); //Ausgabe fuer entscheidung
+        scanf(" %c",&answer); //User-input
+        fflush(stdin); //Tastenzwischenspeicher leeren
     }
     fclose(fp);
     return 0;
@@ -271,32 +284,44 @@ int AppendFile()
 
 int WriteFile()
 {
-    int i;
-    char input[255];
-    char answer;
+    int i; //iterationsvariable
+    char input[255]; //"String"-Variable
+    char answer; // Entscheidungs-Variable
     printf("Loesungswort:");
-    FILE *fp;
-    fp  = fopen ("guesswords.dat", "w");
-    fflush(stdin);
-    fgets(input, 16, stdin);
-    for(i = 0; (i < 100 && input[i] != '\0'); i++)
-        input[i] = input[i] + 13;
-    fprintf(fp,"%s\n",input);
-    printf("Weitere Woerter hinzufuegen? y/n\n");
-    scanf(" %c",&answer);
-    while(answer == 'y' || answer == 'j')
+    FILE *fp; // vom Typ "FILE"
+    fp  = fopen ("guesswords.dat", "w"); //oeffnet Datei
+    fflush(stdin); //tastenzwischenspeicher leeren
+    fgets(input, 16, stdin); // User-input
+    for(i = 0; (i < 100 && input[i] != '\0'); i++) //For-Schleife fuer um Eingabe in kleinbuchstaben und mit ROT13 bearbeiten
     {
-        printf("Loesungswort: ");
-        fflush(stdin);
-        fgets(input, 16, stdin);
-        for(i = 0; (i < 100 && input[i] != '\0'); i++)
-            input[i] = input[i] + 13;
-        fprintf(fp,"%s\n",input);
-        printf("Weitere Woerter hinzufuegen? y/n\n");
-        scanf(" %c",&answer);
-        fflush(stdin);
+        if(input[i] >= 'A' && input[i] <= 'Z') //Wenn grossbuchstabe
+            {
+                input[i] = input[i] + 32; // ASCII + 32 macht grossbuchstabe in kleinbuchstabe
+            }
+        input[i] += 13; //ROT13
     }
-    fclose(fp);
+    fprintf(fp,"%s\n",input); //In Datei schreiben
+    printf("Weitere Woerter hinzufuegen? y/n\n"); //Ausgabe
+    scanf(" %c",&answer); //User-input
+    while(answer == 'y' || answer == 'j') // While-Schleife um weiteres vorgehen einzuleiten
+    {
+        printf("Loesungswort: ");//Ausgabe
+        fflush(stdin); //Tastenzwischenspeicher leeren
+        fgets(input, 16,stdin); //User-input
+        for(i = 0; (i < 100 && input[i] != '\0'); i++) //For-Schleife fuer um Eingabe in kleinbuchstaben und mit ROT13 bearbeiten
+        {
+            if(input[i] >= 'A' && input[i] <= 'Z') //Wenn grossbuchstabe
+            {
+                input[i] = input[i] + 32; // ASCII + 32 macht grossbuchstabe in kleinbuchstabe
+            }
+            input[i] += 13; //ROT13
+        }
+        fprintf(fp,"%s\n",input); //In Datei schreiben
+        printf("Weitere Woerter hinzufuegen? y/n\n"); //Ausgabe
+        scanf(" %c",&answer); //User-input
+        fflush(stdin); //Tastenzwischenspeicher leeren
+    }
+    fclose(fp); //Datei schliessen
     return 0;
 }
 
