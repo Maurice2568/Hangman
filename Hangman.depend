@@ -33,18 +33,17 @@
 	<string.h>
 	<time.h>
 
-1620050972 source:c:\users\johnson\documents\github\hangman\custom_lib.c
+1620061226 source:c:\users\johnson\documents\github\hangman\custom_lib.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<sys/stat.h>
 	"custom_lib.h"
-	<ctype.h>
 
-1620051385 c:\users\johnson\documents\github\hangman\custom_lib.h
+1620060654 c:\users\johnson\documents\github\hangman\custom_lib.h
 
-1619530182 source:c:\users\johnson\documents\github\hangman\main.c
+1620056674 source:c:\users\johnson\documents\github\hangman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"custom_lib.h"

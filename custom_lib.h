@@ -1,12 +1,21 @@
 #ifndef CUSTOM_LIB_H_INCLUDED
 #define CUSTOM_LIB_H_INCLUDED
 
-int Screen(char aView[255], char aIncorrectLetters[24], char aCorrectLetters[24], char aPlayer1[255], char aPlayer2[255], int aFails);
+int ScreenAfter(char *aView, char *aIncorrectLetters, char *aPlayer, int aFails, char *aResult, int aTime);
+int ScreenBefore(char *aView, char *aIncorrectLetters, char *aCorrectLetters, char *aPlayer, int aFails);
+void Winscreen();
 char ReadChar();
 void RemoveChars(char* str, char c);
-int Play(char *aResult);
+int Play(char *aResult, int aTwoPlayerMode);
 int Menu();
 char* ReadFile();
 int AppendFile();
 int WriteFile();
+void PrintHangman(int aFails);
+void sort(char *aChars);
+void swap(char *aA, char *aB);
+void SaveScores(char* aName,int aFails,int aTime,char *aWord);
+void ReadScores();
+void SuggestPlayer();
+
 #endif // CUSTOM_LIB_H_INCLUDED
